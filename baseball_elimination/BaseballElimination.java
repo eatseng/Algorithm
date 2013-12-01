@@ -11,7 +11,7 @@ public class BaseballElimination {
 	private int num_teams;
 	private String[] teams;
 	private String prev_team;
-	private Set<String> rset;
+	private Set<String> certification;
 	private boolean peliminated;
 	
 	public static void main(String[] args) {
@@ -116,7 +116,8 @@ public class BaseballElimination {
 	}
 	
 	public boolean isEliminated(String team) {
-		// is given team eliminated?
+		// returned buffered results since isEliminated and certificateOfElimination share
+		//identical code
 		if (team.equals(prev_team))
 			return peliminated; 
 	
@@ -130,20 +131,20 @@ public class BaseballElimination {
 			throw new java.lang.IllegalArgumentException("No such team");
 
 		prev_team = team;
-		this.rset = new HashSet<String>();
+		this.certification = new HashSet<String>();
 		peliminated = false;
 		
 		//determine if current team is trivially eliminated
 		for (String t : teams)
 			if (w[x] + r[x] < wins(t)) {
-				rset.add(t);
+				certification.add(t);
 				peliminated = true;
 			}
 	
 		if (peliminated)			
 			return true;
 		
-		//if not trivially elminated
+		//if a team is not trivially eliminated proceed to setup flow network
 		int v = 2 + num_teams;		//track number of vertices
 		for(int i = 0; i < num_teams; i++) 
 			for (int j = i + 1; j < num_teams; j++)
@@ -152,7 +153,7 @@ public class BaseballElimination {
 		
 		FlowNetwork fn = new FlowNetwork(v);
 		
-		//connect start to games to teams
+		//connect start to games, and games to teams
 		int k = 0;
 		for(int i = 0; i < num_teams; i++) 
 			for (int j = i + 1; j < num_teams; j++)
@@ -163,17 +164,18 @@ public class BaseballElimination {
 					k++;
 				}
 		
-		//connect teams to end
+		//connect teams to sink
 		for(int i = 0; i < num_teams; i++) 
 			fn.addEdge(new FlowEdge(i, num_teams + 1, w[x] + r[x] - w[i]));
 
 		//source at index number = num_teams and sink at index number = num_team + 1 
 		FordFulkerson ff = new FordFulkerson(fn, num_teams, num_teams + 1);
 	
+		//check if any team node is saturated, if it is, add team to certification
 		k = 0;
 		for(int i = 0; i < num_teams; i++)
 			if (i != x && ff.inCut(i)) {
-				rset.add(teams[i]);
+				certification.add(teams[i]);
 				k++;
 			}
 		
@@ -186,11 +188,12 @@ public class BaseballElimination {
 	}
 	
 	public Iterable<String> certificateOfElimination(String team) {
+		//see comments for isEliminated
 		if (team.equals(prev_team))
-			if(rset.isEmpty())
+			if(certification.isEmpty())
 				return null;
 			else
-				return rset; 
+				return certification; 
 		
 		int x = -1;
 		for (int i = 0; i < numberOfTeams(); i++)
@@ -200,18 +203,18 @@ public class BaseballElimination {
 		if (x == -1)
 			throw new java.lang.IllegalArgumentException("No such team");
 
-		this.rset = new HashSet<String>();
+		this.certification = new HashSet<String>();
 		prev_team = team;
 		peliminated = false;
 		
 		for (String t : teams)
 			if (w[x] + r[x] < wins(t)) {
-				rset.add(t);
+				certification.add(t);
 				peliminated = true;
 			}
 	
 		if (peliminated)			
-			return rset;
+			return certification;
 		
 		
 		int v = 2 + num_teams;		//track number of vertices
@@ -222,7 +225,7 @@ public class BaseballElimination {
 		
 		FlowNetwork fn = new FlowNetwork(v);
 		
-		//connect start to games to teams
+		//connect source to games, and games to teams
 		int k = 0;
 		for(int i = 0; i < num_teams; i++) 
 			for (int j = i + 1; j < num_teams; j++)
@@ -233,7 +236,7 @@ public class BaseballElimination {
 					k++;
 				}
 		
-		//connect teams to end
+		//connect teams to sink
 		for(int i = 0; i < num_teams; i++) 
 			fn.addEdge(new FlowEdge(i, num_teams + 1, w[x] + r[x] - w[i]));
 			
@@ -242,13 +245,13 @@ public class BaseballElimination {
 		k = 0;
 		for(int i = 0; i < num_teams; i++)
 			if (i != x && ff.inCut(i)) {
-				rset.add(teams[i]);
+				certification.add(teams[i]);
 				k++;
 			}
 		
 		if (k != 0) {
 			peliminated = true;
-			return rset;
+			return certification;
 		}
 		
 		// subset R of teams that eliminates given team; null if not eliminated
