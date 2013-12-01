@@ -17,7 +17,8 @@ public class BaseballElimination {
 	public static void main(String[] args) {
 		Stopwatch sw = new Stopwatch();
 		
-		BaseballElimination division = new BaseballElimination("teams4.txt");
+		//BaseballElimination division = new BaseballElimination("teams4.txt");
+		BaseballElimination division = new BaseballElimination(args[0]);
 		for (String team : division.teams()) {
 	        if (division.isEliminated(team)) {
 	            StdOut.print(team + " is eliminated by the subset R = { ");
@@ -31,17 +32,6 @@ public class BaseballElimination {
 	    }
 		
 		System.out.println("Resizing time: " + sw.elapsedTime() + " seconds.");
-	    /*
-		System.out.println("teams: " + division.teams());
-		for (String teams : division.teams()) {
-			System.out.println(teams);
-			System.out.println("elminated? " + division.isEliminated(teams));
-		}
-			*/
-		
-		System.out.println(division.isEliminated("Atlanta"));
-		System.out.println(division.certificateOfElimination("Atlanta"));
-		
 	}
 	
 	public BaseballElimination(String filename) {
