@@ -21,7 +21,7 @@ using BFS and Digraph to implement shortest path
 
 http://coursera.cs.princeton.edu/algs4/assignments/wordnet.html
 
-Construct: A wordnet group words into sets of synonyms called synsets. One such synset relationship is hyponym. The purpose of this program is the calculate the distance to a common ancestor between two words in wordnet. The algorithm I employed for such calculation is BFS, coupled with digraph datastructure. For optimiziation, I used two BFS, first BFS tracks one wordnet word back to the root, and second BFS tracks the other wordnet word back to the root but it stops if it encounters the path of the first BFS. When the second BFS detects the the path of the first BFS, it will return the distance it had traveled to reach that node as well as the node itself (the node becomes the common ancestor of the two words.)
+Construct: A wordnet group words into sets of synonyms called synsets. One such synset relationship is hyponym. The purpose of this program is the calculate the distance to a common ancestor between two words in wordnet. The algorithm I employed for such calculation is BFS coupled with digraph datastructure. For optimiziation, I used two BFS, first BFS tracks the first wordnet word back to the root, and second BFS tracks the second wordnet word back to the root but it stops if it encounters the path of the first BFS. When the second BFS detects the the path of the first BFS, it will return the distance it had traveled to reach that node as well as the node itself (the node becomes the common ancestor of the two words.)
 
 
 SeamCarver
@@ -39,7 +39,7 @@ using recursive DFS and ternary search trie
 
 http://coursera.cs.princeton.edu/algs4/assignments/boggle.html
 
-Construct: Using DFS to explore every possible combination of word spelling on the Boggle board. Optimization involves checking the trie for the next possible character in the word's spelling - if no such word spelling existing, DFS for that particular path ends.
+Construct: Using DFS to explore every possible combination of word spelling on the Boggle board. Optimization involves checking the trie for the next possible character in the word's spelling - if no such word spelling existing, DFS for that particular path ends. If DFS of any node encounters a new word in trie, that word is stored in a set ready to be returned when all DFS complete their execution.
 
 
 Burrows-Wheeler 
