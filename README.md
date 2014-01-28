@@ -43,7 +43,7 @@ Construct: Using DFS to explore every possible combination of word spelling on t
 
 
 Burrows-Wheeler 
-===============
+----------------
 using Most-Significant-Digit-first string (radix) sort, key index counting algorithm, Move-to-front encoding, Circular suffix array, and Burrows-Wheeler transform
 
 http://coursera.cs.princeton.edu/algs4/assignments/burrows.html
