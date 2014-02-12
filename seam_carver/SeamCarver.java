@@ -101,28 +101,6 @@ public class SeamCarver {
 	        System.out.println("Resizing time: " + sw.elapsedTime() + " seconds.");
 	        inputImg.show();
 	        outputImg.show();
-	        
-	        //printHorizontalSeam(sc);
-	        //printVerticalSeam(sc);
-	        
-	        /*int r = 12, g = 200, b = 100;
-	        int a = Integer.parseInt(("00000000" + Integer.toBinaryString(r)).substring(Integer.toBinaryString(r).length())
-	        		+ ("00000000" + Integer.toBinaryString(g)).substring(Integer.toBinaryString(g).length()) 
-	        		+ ("00000000" + Integer.toBinaryString(b)).substring(Integer.toBinaryString(b).length()), 2);
-	        String e = ("00000000" + Integer.toBinaryString(r)).substring(Integer.toBinaryString(r).length())
-	        		+ ("00000000" + Integer.toBinaryString(g)).substring(Integer.toBinaryString(g).length()) 
-	        		+ ("00000000" + Integer.toBinaryString(b)).substring(Integer.toBinaryString(b).length());
-	        System.out.println("e " + e);
-	        System.out.println("er " + e.substring(0,8));
-	        System.out.println("eg " + e.substring(8,16));
-	        System.out.println("eb " + e.substring(16,24));
-	        System.out.println("a " + a);
-	        String s = ("000000000000000000000000" + Integer.toBinaryString(a)).substring(Integer.toBinaryString(a).length());
-	        System.out.println("s " + s);
-	        System.out.println("r " + Integer.parseInt(s.substring(0, 8), 2));
-	        System.out.println("g " + Integer.parseInt(s.substring(8, 16), 2));
-	        System.out.println("b " + Integer.parseInt(s.substring(16, 24), 2));*/
-	        
 	    }
 	
    public SeamCarver(Picture picture) {
@@ -190,8 +168,7 @@ public class SeamCarver {
 	   for (int i = 0; i < width; i++)
 		   for (int j = 0; j < height; j++)
 			   p.set(i, j, new Color(color[i][j]));
-			   //p.set(i, j, new Color(red[i][j], green[i][j], blue[i][j]));
-	   
+
 	   return p;
    }
    
@@ -373,7 +350,6 @@ public class SeamCarver {
 		   for (int i = -1; i < 1; i++) {
 			   if (a[j] + i < 1 || a[j] + i >= width() - 2)
 				   continue;
-			   //System.out.println("j: " + j + " i: " + i + " a[j]: " + a[j]);
 			   
 			   s1 = ("000000000000000000000000" 
 					   + Integer.toBinaryString(color[a[j] + i - 1][j])).substring(Integer.toBinaryString(color[a[j] + i - 1][j]).length());
