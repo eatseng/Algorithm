@@ -6,24 +6,24 @@ import java.util.*;
 public class SAP {
 	private static final int INFINITY = Integer.MAX_VALUE;
 	private Digraph dg;
-    private int[] distTo;      // distTo[v] = length of shortest s->v path
-    private int[] vDistTo;
-    private int shortest;
-    private int ancestor;
-    private int v_o;
-    private Set<Integer> vmap;
-    private Set<Integer> wmap;
+	private int[] distTo;      // distTo[v] = length of shortest s->v path
+	private int[] vDistTo;
+	private int shortest;
+	private int ancestor;
+	private int v_o;
+	private Set<Integer> vmap;
+	private Set<Integer> wmap;
 
 	
 	private SAP(String file, int n) {
 		dg = new Digraph(n + 1);
 		v_o = INFINITY;
 		ancestor = -1;
-        distTo = new int[dg.V()];
-        vDistTo = new int[dg.V()];
-        vmap = new HashSet<Integer>();
-        wmap = new HashSet<Integer>();
-        
+	        distTo = new int[dg.V()];
+	        vDistTo = new int[dg.V()];
+	        vmap = new HashSet<Integer>();
+	        wmap = new HashSet<Integer>();
+	        
 		In inSAP = new In(file);
 		while(!inSAP.isEmpty()) {
 			String[] inputLine = inSAP.readLine().split(",");
@@ -32,9 +32,9 @@ public class SAP {
 		}
 		
 		for (int v = 0; v < dg.V(); v++) {
-        	distTo[v] = INFINITY;
-        	vDistTo[v] = INFINITY;
-        }
+	        	distTo[v] = INFINITY;
+	        	vDistTo[v] = INFINITY;
+	        }
 	}
 		
 	// constructor takes a digraph (not necessarily a DAG)
@@ -42,15 +42,15 @@ public class SAP {
 		this.dg = new Digraph(G);
 		v_o = INFINITY;
 		ancestor = -1;
-        distTo = new int[dg.V()];
+	        distTo = new int[dg.V()];
 		vDistTo = new int[dg.V()];
-        vmap = new HashSet<Integer>();
-        wmap = new HashSet<Integer>();
+	        vmap = new HashSet<Integer>();
+	        wmap = new HashSet<Integer>();
 		
 		for (int v = 0; v < dg.V(); v++) {
-        	distTo[v] = INFINITY;
-        	vDistTo[v] = INFINITY;
-        }
+	        	distTo[v] = INFINITY;
+	        	vDistTo[v] = INFINITY;
+	        }
 	}
 	
 	private void vreset() {
