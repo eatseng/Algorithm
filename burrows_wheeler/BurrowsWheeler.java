@@ -9,7 +9,6 @@ public class BurrowsWheeler {
     public static void encode() {
     	while (!BinaryStdIn.isEmpty()) { 
 	       	String st = BinaryStdIn.readString();
-    		//String st = "ABRACADABRA!";
 	       	CircularSuffixArray csa = new CircularSuffixArray(st);
 	      
 	        //output index of first
@@ -61,29 +60,6 @@ public class BurrowsWheeler {
 		BinaryStdOut.close();
 	}
 }
-
-/*    public static void decode() {
-    	int first = BinaryStdIn.readInt();
-
-    	while (!BinaryStdIn.isEmpty()) {
-    		char[] s = BinaryStdIn.readString().toCharArray();
-    		int n = s.length;
-    		int[] next = new int[n];
-    		char[] f = new char[n];
-            for (int i = 0; i < n; i++) {
-            	next[i] = i;
-            	f[i] = s[i];
-            }
-    		
-    		mergeSort(f, next);
-    		int index = next[first];
-    		for (int i = 0; i < n; i++) {
-    			BinaryStdOut.write(s[index]);
-    			index = next[index];
-            }
-    		BinaryStdOut.close();
-    	}
-    }*/
 
     // if args[0] is '-', apply Burrows-Wheeler encoding
     // if args[0] is '+', apply Burrows-Wheeler decoding
