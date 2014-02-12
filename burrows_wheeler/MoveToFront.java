@@ -5,10 +5,10 @@ public class MoveToFront {
 	
 	private static char[] get_asc_array() {
 		char[] array = new char[256];
-    	for (int i = 0; i < 256; i++) {
-    		array[i] = (char) i;
-    	}
-    	return array;
+	    	for (int i = 0; i < 256; i++) {
+	    		array[i] = (char) i;
+	    	}
+	    	return array;
 	}
 	
 	public static void encode() {
@@ -26,38 +26,6 @@ public class MoveToFront {
 		BinaryStdOut.close();
 	}
 	
-    /*public static void encode() {
-	char[] array = get_asc_array();
-	
-	while(!BinaryStdIn.isEmpty()) {
-    	char c = BinaryStdIn.readChar();
-    	for (int k = 0; k < array.length; k++) {
-    		if (array[k] == c) {
-    			System.arraycopy(array, 0, array, 1, k);
-    			array[0] = c;
-    			BinaryStdOut.write((char) k);
-    		}
-		}
-    }
-	BinaryStdOut.close();
-}
-	
-    /*public static void encode() {
-    	char[] array = get_asc_array();
-    	
-    	while(!BinaryStdIn.isEmpty()) {
-        	char c = BinaryStdIn.readChar();
-        	for (int k = 0; k < array.length; k++) {
-	    		if (array[k] == c) {
-	    			System.arraycopy(array, 0, array, 1, k);
-	    			array[0] = c;
-	    			BinaryStdOut.write((char) k);
-	    		}
-    		}
-        }
-    	BinaryStdOut.close();
-    }*/
-
     // apply move-to-front decoding, reading from standard input and writing to standard output
     public static void decode() {
     	char[] array = get_asc_array();
