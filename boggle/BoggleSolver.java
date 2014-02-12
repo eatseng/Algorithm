@@ -16,20 +16,18 @@ public class BoggleSolver {
 	public static void main(String args[])
 	{
 		In in = new In(args[0]);
-		//In in = new In("dictionary-yawl.txt");
-		//In in = new In("dictionary-algs4.txt");
-	    String[] dictionary = in.readAllStrings();
+		String[] dictionary = in.readAllStrings();
 		BoggleSolver bs = new BoggleSolver(dictionary);
-
-	    BoggleBoard board = new BoggleBoard(args[1]);
-		//BoggleBoard board = new BoggleBoard("board-q.txt");
-	    int score = 0;
-	    for (String word : bs.getAllValidWords(board))
-	    {
-	        StdOut.println(word);
-	        score += bs.scoreOf(word);
-	    }
-	    StdOut.println("Score = " + score);
+	
+		BoggleBoard board = new BoggleBoard(args[1]);
+		
+		int score = 0;
+		for (String word : bs.getAllValidWords(board))
+		{
+			StdOut.println(word);
+			score += bs.scoreOf(word);
+		}
+		StdOut.println("Score = " + score);
 	}
 	
 	// Initializes the data structure using the given array of strings as the dictionary.
